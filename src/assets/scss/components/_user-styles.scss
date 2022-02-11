@@ -1,0 +1,856 @@
+/*Table of Contents*/
+
+/* 1. Typography and Palette*/
+/* 2. Nav Styles*/
+/* 3. Layout Styles */
+/* 4. Hero Styles*/
+/* 5. Orbit Styles*/
+/* 6. Form Styles */
+/* 7. Button Styles */
+/* 8. Footer Styles */
+/* 8. Lazy Loading Helper Styles */
+/*---------------------------------------------------------------------------*/
+
+/* 1. Typography and Palette*/
+/*---------------------------------------------------------------------------*/
+
+$summit-border-color: get-color(primary);
+$summit-secondary-border-color: get-color(secondary);
+$summit-line-thickness: 8px;
+$bottom-icon-height: 2.5rem; /*using for gram logo and placeholder, summit logo, back to top botton*/
+
+html {
+	background-color: get-color(alert);
+	p {
+		font-size: 1.1rem;
+		font-weight: 500;
+	}
+}
+
+/*adds a frame and zoomed out effect when the site is viewed on a large viewport*/
+@include breakpoint(xlarge) {
+	.outer-box-frame {
+		border: $summit-line-thickness*4 double $summit-border-color;
+		margin: 2rem auto; /*the auto for the left/right keeps the page centered*/
+		padding: 4rem;
+	}
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.font-family-2 {
+  font-family: "ministry", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 500;
+}
+
+@mixin font-family-2 {
+  font-family: "ministry", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 500;
+}
+
+/* 2. Nav Styles*/
+/*---------------------------------------------------------------------------*/
+/*style for sticky scroll up*/
+.back-to-top {
+	background: none;
+	margin: 0;
+	position: fixed;
+	border-radius: 0.5rem;
+	width: $bottom-icon-height;
+	height: $bottom-icon-height;
+	z-index: 100;
+	display: none;
+	text-align: center;    
+	background-color: get-color(secondary);
+	transition: all 0.4s ease;
+	bottom: 1.5rem;
+	right: 1.5rem;
+	&:hover {
+		background-color: darken($white,5%);
+	}
+	svg {
+		width: 1.5rem;
+		fill: $white;
+		z-index: 2;
+        -webkit-transform: translateY(1px);
+                transform: translateY(1px);
+		&:hover {
+			fill: get-color(secondary);
+		}    
+	}
+}
+
+.menu-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 1rem;
+	/*border for business card style mobile page*/
+	@media screen and (max-width: 414px) {
+		border: $summit-line-thickness*2 double get-color(secondary);
+		margin-top: 1rem;
+	}
+	@include breakpoint(medium) {
+		
+	}
+}
+
+.logo-line {
+	img {
+		width: 8rem;
+		@include breakpoint(medium) {
+			width: 16rem;	
+		}
+		@include breakpoint(large) {
+			width: 20rem;
+		}
+	}
+	padding: .5rem 2rem 1rem 2rem;
+    @media screen and (min-width: 414px) {
+	    border-top: $summit-line-thickness solid get-color(secondary);
+	    padding-top: 1.25rem; /*using this and the padding top above to try to get home page to fit on mobile*/
+	}
+}
+
+.title-line  {
+	h1 {
+		letter-spacing: .075rem;
+	    border-bottom: $summit-line-thickness solid get-color(secondary);
+	    padding-bottom: 1rem;
+	    font-size: 1.5rem;
+	    @include breakpoint(medium) {
+			font-size: 2.75rem;
+			padding-bottom: 1.25rem;
+	    }
+	    @include breakpoint(large) {
+			font-size: 3.5rem;
+	    }	
+	}
+}
+
+.phone-number-line {
+	padding-top: 0.5rem;
+	@include breakpoint(medium){
+		padding-top: 1rem;
+	}
+	@include breakpoint(large){
+		padding-top: 1rem;
+	}
+	h1 {
+		font-size: 1.35rem;
+		letter-spacing: 0.075rem;
+		a {
+			white-space: nowrap;
+			transition: color .3s ease-in;
+			&:hover	{
+				color: get-color(secondary);
+			}
+		}
+		@include breakpoint(medium) {
+			font-size: 1.75rem;
+		}
+		@include breakpoint(large) {
+			font-size: 2.25rem;
+		}
+	}
+	a {
+		letter-spacing: 0.075rem;
+	}
+/*span wraps the dot which is hidden when name and number fit on two lines*/
+	span {
+		display: none;
+		@include breakpoint(390px) {
+			display: inline;
+		}
+	}
+}
+
+
+/* using a div lets the address parts stay on one line when the viewport is small, displayed inline*/
+/* to make they components spread evenly switch display to inline-block float left*/
+
+.license-line {
+	padding-top: .5rem;
+	div {
+		float: none;
+		display: inline;
+		width: 25%;
+		letter-spacing: 0.075rem;
+		line-height: 1.7;
+		@include font-family-2;
+		font-size: 1.15rem;
+		.license-number {
+			white-space: nowrap; /* this style may be unnecessary, need to prevent part of license number from wrapping*/
+		}
+		&:nth-child(2), &:nth-child(3), &:nth-child(4) {
+			margin-left: 0.75rem;
+		}
+		@include breakpoint(medium) {
+			font-size: 1.4rem;
+			display: inline-block;
+			float: left;
+			&:nth-child(2), &:nth-child(3), &:nth-child(4) {
+				margin-left: 0rem;
+				}
+		}
+		@include breakpoint(large) {
+			font-size: 2rem;
+		}
+	}
+}
+
+.link-line {
+	padding: 0.5rem 0rem;
+	letter-spacing: 0.125rem;
+	z-index: 1;
+	/*this style turns all links gray on mouse hover and the link hovered changes with style below*/
+	&:hover {
+		a {
+			color: $medium-gray;
+		}
+	}
+	a {
+		font-size: 1rem;
+		transition: color .3s ease-in;
+		&:hover	{
+			color: get-color(secondary);
+			}
+		@media screen and (max-width: 414px) {
+			padding-bottom: .25rem;
+			}			
+	@include breakpoint(medium) { 
+			font-size: 1.25rem;
+		}
+	@include breakpoint(large) {
+		font-size: 2rem;
+		} 
+	}
+	li {
+		background: $white;
+	}
+	@include font-family-2;
+
+}
+
+.line-line {
+    border: $summit-line-thickness/2 solid get-color(secondary);
+	line-height: 22.4px;
+	margin: -30px 0 22px 0; /*needs to be adjusted everytime $summit-line-thickness is changed*/
+	z-index: 0;
+	@include breakpoint(medium) {
+		margin: -32px 0 22px 0; /*needs to be adjusted everytime $summit-line-thickness is changed*/
+	}
+	@include breakpoint(large) {
+		margin: -36px 0 22px 0; /*needs to be adjusted everytime $summit-line-thickness is changed*/
+	}
+	@media screen and (max-width: 414px) {
+		margin: -24px 0 22px 0;
+		}	
+}
+
+/*wrapper and media query for business card style mobile page*/
+
+.full-screen {
+	display: flex;
+	flex-direction: flex;
+	align-items: center;
+	justify-content: space-between;
+	@media screen and (max-width: 414px) {
+		height: 100vh;
+	}
+}
+
+.scroll-down-button {
+	padding: 1rem;
+    svg {
+      height: rem-calc(45);
+      width: rem-calc(45);
+      fill: get-color(secondary);
+    }
+    @include breakpoint(414) {
+    	display: none;
+    }
+  }
+
+/* 3. Layout Styles*/
+/*----------------------------------------------------------------------------------------*/
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.full-page-main {
+	flex: 1;
+}
+
+.two-column-text {
+	padding: 1rem 2rem;
+	&-success-bg {
+		background-color: get-color(success);
+	}
+	&-primary-bg {
+  		background-color: get-color(primary);
+		color: $white;
+	}
+}
+
+.two-column-text-title {
+	h1, h2 {
+		@include font-family-2;
+		padding: 0rem 1rem 1rem 1rem;
+		letter-spacing: 0.09rem;
+		@include breakpoint(medium) {
+			padding: 1rem 6rem 1.5rem 6rem;
+		}
+		@include breakpoint(large) {
+			padding: 2rem 6rem 2.5rem 6rem;
+		}
+	}
+	h1 + h2 {
+		padding-top: 0rem;
+	}
+}
+
+.two-column-text-text {
+	p {
+		padding: .5rem 1rem;
+		line-height: 1.75;
+		letter-spacing: 0.04rem;
+	}
+	/* style keeps bottom padding correct on single column, small viewports*/
+	div p:first-of-type {
+		padding-bottom: 0rem;
+	}
+	/* style increases bottom padding on two column and up viewports*/
+	@include breakpoint(medium) {
+		div p:last-of-type {
+			padding-bottom: 1rem;
+		}
+	}
+	h2 {
+		@include font-family-2;
+		letter-spacing: 0.05rem;
+		padding-left: 1rem;
+		@include breakpoint(medium) {
+			padding: 1rem 0 0 3rem;
+			font-size: 1.5rem;
+			margin-bottom: -1rem;
+		}
+	}
+}
+
+.home-image {
+	background-color: $white;
+	color: $black;
+	padding: 2rem 0rem;
+	&-dark-bg {
+		background-color: $black;
+		color: $white;
+		.home-image-image {
+			img {
+				border: $summit-line-thickness solid lighten($summit-border-color,65);
+			}			
+		}
+	}
+	&-insured, &-jj {
+		padding: 1rem 0rem;
+	}
+}
+
+.home-image-image {
+	display: flex;  /*need to declare to get center alignment*/
+	align-items: center;
+	justify-content: center;
+	img {
+		@include breakpoint(medium) {
+			width: 100%;
+		}
+	}
+	@include breakpoint(medium only) {
+		padding: 0rem 1.5rem; /* img and width BP above needed padding to improve spacing*/
+	}
+}
+
+.home-image-title {
+	h2 {
+		text-align: center;
+		@include font-family-2;
+		letter-spacing: 0.08rem;
+		&:first-child {
+			margin-top: 1rem;
+		}
+	}
+	.home-image-title-links {
+		a {
+			color: darken(get-color(secondary),5);
+			transition: color 0.4s ease;
+			&:hover {
+				color: lighten(get-color(secondary), 10%);
+			}
+		}
+	}
+	@include breakpoint(medium) {
+		display: flex; /*need to declare to get center alignment*/
+		padding: 2rem;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		h2 a {
+			line-height: 1.2;
+			padding-bottom: 1.5rem;
+			&:first-child {
+				margin-top: 0rem;
+				padding-bottom: 1.5rem;
+			}
+			&:last-child {
+				padding-bottom: 0;
+				border-bottom: none;
+			}
+		}
+	}
+	@include breakpoint(950px) {
+	}
+}
+
+.home-image-free-wood {
+	padding: 0rem 1.5rem;
+	p {
+		padding: .5rem 0rem;
+		line-height: 1.75;
+		letter-spacing: 0.04rem;
+		@include breakpoint(medium) {
+			padding: 2rem;
+		}
+		@include breakpoint(large) {
+			padding: 2rem 6rem;
+		}
+	}
+	h2 {
+		text-align: center;
+		@include font-family-2;
+		letter-spacing: 0.08rem;
+		&:first-child {
+			margin-top: 1rem;
+		}
+		&:last-child {
+			padding-bottom: 1rem;
+			border-bottom: solid $summit-line-thickness get-color(secondary);
+		}
+	}
+	/*these styles center and fit the signup hero in the medium display, when it's to the right of image*/
+	@include breakpoint(medium) {
+		-ms-grid-row-align: center;
+		    align-self: center;
+		h2 {
+			font-size: 1.7rem;
+			&:first-child {
+				margin-top: 0rem;
+			}
+		}
+	}
+}
+
+/*html doesn't follow BEM so selecting wrapper*/
+div.home-image.free-wood.grid-container {
+	padding-top: 1rem;
+}
+
+.home-image-bio-text {
+	@include breakpoint(medium) {
+		padding-right: 2rem;
+		padding-top: 0;
+	    -ms-grid-row-align: center;
+	        align-self: center;
+	}
+	p {
+		letter-spacing: 0.04rem;
+		padding: 0.5rem 1.5rem;
+		&:first-of-type {
+			padding-top: 2rem;
+		}
+	}
+	@include breakpoint(large) {
+		padding: 3rem;
+	}
+	@include breakpoint(xlarge) {
+		padding: 1.25rem;
+	}
+}
+
+.home-image-jj {
+	@include breakpoint(medium) {
+		padding-bottom: 2rem;
+	}
+}
+
+.testimonial {
+	background-size: cover;
+	background-color: get-color(primary);
+	padding: 2.5rem 2.5rem 1.5rem 2.5rem;
+	&-text{
+		background-color: $white;
+		padding: 2rem;
+		border-radius: 0.5rem;
+	}
+	&-text blockquote {
+		border: none;
+		padding: 0rem 2rem;
+		margin-bottom: 0;
+		p {
+			margin-bottom: 0;
+			color: $black;
+		}
+	}
+	&-title h4 {
+		margin-top: 0.25rem;
+		color: $white;
+
+	}
+	&-1 {
+		background: url(../img/green-bark-1x1.jpg) center center no-repeat;
+	}
+	&-2 {
+		background: url(../img/bark-and-interior-bg-1x1.jpg) center center no-repeat;
+	}
+	&-3 {
+		background: url(../img/dark-bark-1x1.jpg) center center no-repeat;
+	}		
+	&-4 {
+		background: url(../img/green-canopy-1x1.jpg) center center no-repeat;
+	}}
+
+.main-callout {
+	padding: 2rem 0rem;
+	h1, h2 {
+		@include font-family-2;
+	}
+	&-button {
+		padding-top: 1rem;
+	}
+	&-success-bg {
+		background-color: get-color(success);
+	}
+	&-alert-bg {
+		background-color: get-color(alert);
+		color: $white;
+	}
+}
+
+.testimonials-image {
+	padding: 1rem 0rem;
+}
+
+.testimonial-link {
+	/*top padding is 4rem because button displays in quote wrapper */
+	padding: 3rem 0rem 2.5rem 0rem;
+}
+
+.middle-callout-button {
+	padding: 3rem 0rem 1rem 0rem;
+}
+
+.tree-removal-progression {
+	&-1 {
+		padding-bottom: 1rem;
+	}
+	&-2 {
+		padding-top: 1rem;
+	}
+}
+
+.gearing-up {
+	padding-bottom: 1rem;
+}
+
+.tree-services-image, .testimonials-image {
+	img {
+		border: $summit-line-thickness solid $summit-border-color;
+	}	
+}
+
+.summit-intro {
+	padding: 1rem 0rem;
+	&-background {
+		background: url("../img/moss-1x1.jpg") no-repeat center;
+		padding: 1rem;
+		h1 {
+			padding: 1rem;
+			@include font-family-2;
+			color: $white;
+		}
+	}
+	&-background-text-box {
+		background: $white;
+		border-radius: 0.5rem;
+		padding: 2.5rem;
+		margin: 1rem 2rem;
+		p {
+		 	letter-spacing: 0.02rem;
+		 	margin: 0rem;
+		}
+		margin-bottom: 4rem;
+	}
+	&-background-button {
+		padding-bottom: 3rem;
+	}
+}
+
+.primary-border {
+	border: $summit-line-thickness solid $summit-border-color;
+}
+
+.secondary-border {
+	border: $summit-line-thickness solid $summit-secondary-border-color;
+}
+
+/* 4. Hero Styles*/
+/*----------------------------------------------------------------------------------------------------------------*/
+
+.hero-consult {
+	background: url("../img/tree-rings-16x7.jpg") no-repeat center;
+	background-size: cover;
+	background-color: $white;
+	height: 11.3rem;
+	@include breakpoint(medium) {
+		height: 16.4rem;
+	}
+	&-text {
+		padding: 0rem 0rem 1rem 1rem; 
+		h1 {
+			letter-spacing: 0.15rem;
+			@include font-family-2;
+			margin-bottom: 0rem;
+		}
+		button {
+			color: $black;
+		}
+	} 
+}
+
+.hero-free-wood {
+	background: url("../img/bare-tree-trunk-16x7.jpg") no-repeat center;
+	background-size: cover;
+	background-color: $white;
+	height: 11.3rem;
+	@include breakpoint(medium) {
+		height: 16.4rem;
+	}
+	&-text {
+		padding: 0rem 0rem 1rem 1rem; 
+		h1 {
+			letter-spacing: 0.15rem;
+			@include font-family-2;
+			margin-bottom: 0rem;
+		}
+		button {
+			color: $black;
+		}
+	} 
+}
+
+.wood-radio-list {
+	p {
+		padding-right: .25rem;
+	}
+}
+
+.bio-heading, .testimonials-heading {
+	h1 {
+		@include font-family-2;
+		letter-spacing: 0.04rem;		
+	}
+}
+
+.testimonials-heading {
+	padding-bottom: 1.5rem;
+}
+
+/* 5. Orbit Styles*/
+/*----------------------------------------------------------------------------------------------------------------*/
+.orbit-summit {
+	margin-top: 3rem;
+}
+
+/* 6. Form Styles */
+/*----------------------------------------------------------------------------------------------------------------*/
+
+/*takes away default 1rem padding so the header image is full width*/
+#consultation-reveal, #free-wood-reveal {
+	padding: 0rem;
+	border: 0rem;
+}
+
+/*returns default 1rem padding to rest of the reveal box*/
+.consult .grid-y, .free-wood .grid-y {
+	padding: 1rem;
+}
+
+.problem-text {
+	height: 5rem;
+}
+
+#mce-PHONE-area {
+	width: 3rem;
+}
+
+#mce-PHONE-detail1, #mce-PHONE-detail2 {
+	width: 4rem;
+}
+/* 7. Button Styles */
+/*--------------------------------------------------------------------------------------------------------------*/
+
+.button-summit {
+	@include button-hollow;
+	color: get-color(primary);
+	border: $summit-line-thickness solid get-color(primary);
+	@include font-family-2;
+  	line-height: 1.3;
+	transition: all 0.4s ease;
+	padding: 0.75rem 0.9rem;
+	letter-spacing: 0.1rem;
+	&:hover {
+		border-color: lighten(get-color(primary),25);
+		color: lighten(get-color(primary),25);
+	}
+	font-size: 1.2rem;  	
+	@include breakpoint(medium) {
+		font-size: 1.5rem;  	
+	}
+	@include breakpoint(large) {
+		font-size: 1.7rem;  	
+	}
+	&-white {
+		color: $white;
+		border: $summit-line-thickness solid $white;
+	}
+}
+
+/* 8. Footer Styles */
+/*--------------------------------------------------------------------------------------------------------------*/
+.full-page-footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 1.5rem 1rem;
+}
+
+.footer-madrona-link {
+	-ms-grid-row-align: center;
+	    align-self: center;
+	svg {
+		margin: 0 0.1rem;
+		height: 1.1rem;
+	}
+	a {
+		padding-right: 0rem; /*helps center bottom graphic*/
+		display: inline;
+		transition: opacity 0.4s ease;
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+	margin-left: -2rem; /*centers section*/
+}
+
+.footer-madrona-link span {
+	padding: 0.5rem 0rem 0.1rem 0.6rem;
+}
+
+/*getting the svg to line up inline just right*/
+.madrona-bottom svg {
+    -webkit-transform: translateY(0.2rem) translateX(-0.5rem);
+            transform: translateY(0.2rem) translateX(-0.5rem);
+}
+
+.st0 {
+	fill: get-color(secondary);
+}
+
+.footer-instagram-link, .footer-summit-logo {
+	img {
+		height: $bottom-icon-height;
+	}
+}
+
+/*this is no longer necessary if we go with the summit logo on the gbottom of the page*/
+.footer-place-holder img {
+	height: $bottom-icon-height;
+	width: $bottom-icon-height;
+}
+
+/* 8. Lazy Loading Helper Styles */
+/*--------------------------------------------------------------------------------------------------------------*/
+
+.loader {
+  position:relative;
+  overflow: hidden;
+  width: auto;
+}
+
+.loader object {
+  position: absolute;
+}
+
+.loader img, .loader object {
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+object {
+/*@include image-border; need to find image border mixin*/
+  position: relative;
+  float: left;
+  display: block;
+  
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 1000px;
+    height: 1000px;
+    content: '';
+    background: #efefef;
+  }
+}
+
+.frozen {
+
+  -webkit-filter: blur(8px);
+          filter: blur(8px);
+  -webkit-transform: scale(1.04);
+          transform: scale(1.04);
+  -webkit-animation: 0.1s ease-in 0.4s 1 forwards fade;
+          animation: 0.1s ease-in 0.4s 1 forwards fade;
+  width: 100%;
+}
+
+@-webkit-keyframes fade {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}

@@ -1,0 +1,205 @@
+
+
+/*Table of Contents*/
+/* 2. Nav Styles*/
+
+/* 1. Typography*/
+/*---------------------------------------------------------------------------*/
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.font-family-1 {
+  font-family: "ministry", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.font-family-2 {
+  font-family: "ministry", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 500;
+}
+
+.font-family-3 {
+  font-family: "serenity", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.font-family-4 {
+  font-family: "program", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.font-family-5 {
+  font-family: "cresta", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.font-family-6 {
+  font-family: "cresta", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.font-family-7 {
+  font-family: "instant", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 400;
+}
+
+@mixin font-family-1 {
+  font-family: "ministry", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+@mixin font-family-2 {
+  font-family: "ministry", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 500;
+}
+
+@mixin font-family-3 {
+  font-family: "serenity", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@mixin font-family-4 {
+  font-family: "program", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@mixin font-family-5 {
+  font-family: "cresta", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@mixin font-family-6 {
+  font-family: "cresta", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin font-family-7 {
+  font-family: "instant", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 400;
+}
+
+
+/* 2. Nav Styles*/
+/*---------------------------------------------------------------------------*/
+.menu-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.menu-button {
+  letter-spacing: .1rem;
+  padding: 0.75rem;
+  border: none;
+  height: 5vh;
+  @include breakpoint(medium) {
+    display: none;
+  }
+} 
+
+.logo-line img {
+  height: 35vh;
+  margin-bottom: 1rem;
+}
+
+.title-line h1 {
+  letter-spacing: .175rem;
+  height: 15vh;
+  font-size: 5vh;
+}
+
+.phone-number-line h1 {
+  letter-spacing: 0.125rem;
+  height: 15vh;
+  font-size: 4.5vh;
+  a {
+    white-space: nowrap;
+  }
+}
+
+.phone-number-line h1 {
+  letter-spacing: .125rem;
+}
+
+/* using a div lets the address parts stay on one line when the viewport is small, displayed inline*/
+/* to make they components spread evenly switch display to inline-block float left*/
+.license-line div {
+  float: none;
+  display: inline;
+  width: 25%;
+  letter-spacing: 0.15rem;
+  line-height: 1.9;
+  height: 15vh;
+  font-size: 4vh;
+  @include font-family-4;
+  .license-number {
+    white-space: nowrap; /* this style may be unnecessary, need to prevent part of license number from wrapping*/
+  }
+  &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+    margin-left: 0.75rem;
+  }
+  @include breakpoint(medium) {
+    display: inline-block;
+    float: left;
+    &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+      margin-left: 0rem;
+    }
+  }
+}
+
+.link-line {
+  display: none;
+  letter-spacing: 0.125rem;
+  z-index: 1;
+  height: 5vh;
+  transition: display .25s ease-in;
+  li {
+    background: transparent;
+  }
+  @include breakpoint(small only){
+    li:last-of-type {
+      border-bottom: 3px solid lighten(get-color(secondary),10);
+      }
+    }
+  @include breakpoint(medium) {
+    display: flex;
+  }
+}
+
+.show-menu {
+  display: flex;
+}
+
+.full-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scroll-down-button {
+    svg {
+      height: rem-calc(45);
+      width: rem-calc(45);
+      fill: get-color(primary);
+    }
+  }
